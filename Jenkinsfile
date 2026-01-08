@@ -103,7 +103,7 @@ pipeline {
         sendDatadogEvent("CI pipeline failed", "Build ${env.BUILD_URL} failed. Check Jenkins console.", "error")
       }
     }
-    always {
+    cleanup {
       deleteDir()
     }
   }
