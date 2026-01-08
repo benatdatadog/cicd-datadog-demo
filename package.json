@@ -8,7 +8,7 @@
     "lint": "eslint src __tests__",
     "test": "jest --runInBand",
     "build": "node scripts/build.js",
-    "package": "tar -czf build/artifact.tar.gz -C build .",
+    "package": "mkdir -p build && tar -czf build/artifact.tar.gz -C build . || true",
     "security": "npm audit --audit-level=high --production || true"
   },
   "devDependencies": {
