@@ -2,6 +2,10 @@
 // Requires a secret text credential named "datadog-api-key" containing your DD API key.
 
 def sendDatadogEvent(String title, String text, String alertType = 'info') {
+  if (!env.DD_API_KEY?.trim()) {
+    echo "DD_API_KEY missing; skipping Datadog event '${title}'"
+    return
+  }
   // Send a lightweight event so you can visualize pipeline activity in Datadog.
   sh """
     curl -s -X POST \\
@@ -100,7 +104,7 @@ pipeline {
       }
     }
     always {
-      cleanWs(deleteDirs: true)
+      deleteDir()
     }
   }
 }
